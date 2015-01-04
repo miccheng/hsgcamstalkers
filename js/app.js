@@ -30,11 +30,13 @@ var photoPush = function(photo){
   }
 
   if ( photo.match(/^pi/g) ) {
+    photoObj.cam = 'pi';
     photoObj.w = 2592;
     photoObj.h = 1944;
   }
   else if ( photo.match(/^hsgcam/g) )
   {
+    photoObj.cam = 'hsgcam';
     photoObj.w = 800;
     photoObj.h = 600;
   }
@@ -43,7 +45,7 @@ var photoPush = function(photo){
 }
 
 var buildList = function(photo, key) {
-  var link = $('<a>').attr('href', photo.src).data('photo-idx', key).text(photo.title + ' (' + photo.orgSrc + ')');
+  var link = $('<a>').attr('href', photo.src).data('photo-idx', key).text(photo.title + ' (' + photo.cam + ')');
   link.click(function(e){
     e.preventDefault();
     gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
