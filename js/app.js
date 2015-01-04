@@ -26,7 +26,7 @@ var photoPush = function(photo){
 
   if ( photo.match(/\d{10}/) ) {
     var unixTime = photo.match(/\d{10}/)[0];
-    photoObj.title = moment.unix(unixTime).tz('Asia/Singapore').format('MMMM Do YYYY, h:mm:ss a');
+    photoObj.title = moment.unix(unixTime).tz('Asia/Singapore').format('MMM D, YYYY, h:mm a');
   }
 
   if ( photo.match(/^pi/g) ) {
