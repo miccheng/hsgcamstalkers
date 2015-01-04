@@ -17,7 +17,7 @@ body {
 
 #photosList li a{
   display: block;
-  padding: 7px;
+  padding: 3px;
 }
 
 #photosList li a:hover{
