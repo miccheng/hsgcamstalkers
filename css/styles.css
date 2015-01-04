@@ -23,3 +23,7 @@ body {
 #photosList li a:hover{
   background-color: #ffeeee;
 }
+
+span.navbar-brand{
+  color: #fff !important;
+}
