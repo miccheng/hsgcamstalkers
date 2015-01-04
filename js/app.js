@@ -26,7 +26,7 @@ var photoPush = function(photo){
 
   if ( photo.match(/\d{10}/) ) {
     var unixTime = photo.match(/\d{10}/)[0];
-    photoObj.title = moment.unix(unixTime).tz('Asia/Singapore').format('MMM D, YYYY, h:mm a');
+    photoObj.title = moment.unix(unixTime).tz('Asia/Singapore').format('MMM DD, YYYY, hh:mm a');
   }
 
   if ( photo.match(/^pi/g) ) {
@@ -40,12 +40,13 @@ var photoPush = function(photo){
     photoObj.w = 800;
     photoObj.h = 600;
   }
+  photoObj.title += ' (' + photoObj.cam + ')'
 
   items.push(photoObj);
 }
 
 var buildList = function(photo, key) {
-  var link = $('<a>').attr('href', photo.src).data('photo-idx', key).text(photo.title + ' (' + photo.cam + ')');
+  var link = $('<a>').attr('href', photo.src).data('photo-idx', key).text(photo.title);
   link.click(function(e){
     e.preventDefault();
     gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
@@ -60,7 +61,7 @@ var initGallery = function() {
   $.getJSON( "http://cam.hackerspace.sg/json.cgi", function( data ) {
     _.map(data, photoPush);
     _.map(items, buildList);
-    $('h3').text("HackerspaceSG Camera Feed")
+    $('h3').text("HSG Camera Feed")
     gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
     gallery.init();
   });
