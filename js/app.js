@@ -61,7 +61,7 @@ var initGallery = function() {
   $.getJSON( "http://cam.hackerspace.sg/json.cgi", function( data ) {
     _.map(data, photoPush);
     _.map(items, buildList);
-    $('h3').text("HSG Camera Feed")
+    $('h4').text("Photos")
     gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
     gallery.init();
   });

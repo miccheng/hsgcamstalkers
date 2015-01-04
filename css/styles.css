@@ -1,0 +1,25 @@
+body {
+  padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+}
+
+.thumb {
+  margin-bottom: 30px;
+}
+
+.navbar-inverse{
+  background-color: #CC071E;
+  border: 0px;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus{
+  background-color: #CC071E;
+}
+
+#photosList li a{
+  display: block;
+  padding: 7px;
+}
+
+#photosList li a:hover{
+  background-color: #ffeeee;
+}
