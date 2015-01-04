@@ -1,3 +1,5 @@
+var gallery;
+
 var pswpElement = document.querySelectorAll('.pswp')[0];
 
 // build items array
@@ -10,11 +12,16 @@ var options = {
   index: 0 // start at first slide
 };
 
+moment.tz.add(
+  "Asia/Singapore|SMT MALT MALST MALT MALT JST SGT SGT|-6T.p -70 -7k -7k -7u -90 -7u -80|012345467|-2Bg6T.p 17anT.p 7hXE dM00 17bO 8Fyu Mspu DTA0"
+);
+
 var photoPush = function(photo){
   if (photo == 'noop') return;
 
   var photoObj = {
-    src: 'http://cam.hackerspace.sg/'+photo
+    src: 'http://cam.hackerspace.sg/'+photo,
+    orgSrc: photo
   }
 
   if ( photo.match(/\d{10}/) ) {
@@ -35,10 +42,24 @@ var photoPush = function(photo){
   items.push(photoObj);
 }
 
+var buildList = function(photo, key) {
+  var link = $('<a>').attr('href', photo.src).data('photo-idx', key).text(photo.title + ' (' + photo.orgSrc + ')');
+  link.click(function(e){
+    e.preventDefault();
+    gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+    gallery.init();
+    gallery.goTo(key);
+  });
+  var item = $('<li>').append(link);
+  $('#photosList').append(item);
+}
+
 var initGallery = function() {
   $.getJSON( "http://cam.hackerspace.sg/json.cgi", function( data ) {
     _.map(data, photoPush);
-    var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+    _.map(items, buildList);
+    $('h3').text("HackerspaceSG Camera Feed")
+    gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
     gallery.init();
   });
 }
